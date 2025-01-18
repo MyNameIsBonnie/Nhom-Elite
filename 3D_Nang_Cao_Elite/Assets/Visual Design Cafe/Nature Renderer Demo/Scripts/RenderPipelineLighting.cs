@@ -94,8 +94,8 @@ namespace NatureRendererDemo
                 _legacyInputSystem.SetActive( false );
                 _newInputSystem.SetActive( true );
 #else
-                _legacyInputSystem.SetActive( true );
-                _newInputSystem.SetActive( false );
+                //_legacyInputSystem.SetActive( false );
+                //_newInputSystem.SetActive( false );
 #endif
             }
 
