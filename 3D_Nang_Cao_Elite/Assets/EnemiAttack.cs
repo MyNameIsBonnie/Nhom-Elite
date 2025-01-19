@@ -1,57 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class EnemiAttack : MonoBehaviour
 {
-    public Transform player;  // Tham chiếu đến đối tượng người chơi
-    public float moveSpeed = 3f;  // Tốc độ di chuyển của quái vật
-    public float attackRange = 2f;  // Phạm vi tấn công của quái vật
-    public float attackCooldown = 1f;  // Thời gian chờ giữa các lần tấn công
+    public float attackRange = 2.0f; // Khoảng cách tấn công
+    public float attackRate = 1.0f;  // Tần suất tấn công
+    public int damageAmount = 10;    // Lượng sát thương
+    private float nextAttackTime = 0f;
+    private NavMeshAgent navMeshAgent;
 
-    private float lastAttackTime;  // Thời điểm tấn công cuối cùng
+    // Tham chiếu tới người chơi
+    private Transform player;
+    private PlayerHealth playerHealth; // Thêm biến này để truy cập sức khỏe của người chơi
 
     void Start()
     {
-        // Tìm đối tượng người chơi trong game
+        navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerHealth = player.GetComponent<PlayerHealth>(); // Khởi tạo biến PlayerHealth
     }
 
     void Update()
     {
         if (player != null)
         {
+            navMeshAgent.SetDestination(player.position);
+
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            if (distanceToPlayer <= attackRange)
+            if (distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
             {
-                if (Time.time > lastAttackTime + attackCooldown)
-                {
-                    AttackPlayer();
-                    lastAttackTime = Time.time;
-                }
-            }
-            else
-            {
-                MoveTowardsPlayer();
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
             }
         }
     }
 
-    void MoveTowardsPlayer()
+    void Attack()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-        transform.LookAt(player);
-    }
-
-    void AttackPlayer()
-    {
-        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+        // Trừ máu người chơi
         if (playerHealth != null)
         {
-            int damage = 10;  // Số sát thương mà quái vật gây ra
-            playerHealth.TakeDamage(damage);
-            Debug.Log("Quái vật tấn công! Người chơi nhận " + damage + " sát thương.");
+            playerHealth.TakeDamage(damageAmount); // Gọi hàm TakeDamage trong PlayerHealth
         }
+
+        // Gọi hàm tấn công ở đây
+        Debug.Log("Quái vật tấn công người chơi!");
+
+        // Có thể thêm các phương thức như hiệu ứng tấn công, âm thanh, vv...
     }
 }

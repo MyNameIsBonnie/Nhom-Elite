@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;  // Sức khỏe tối đa của người chơi
-    private int currentHealth;  // Sức khỏe hiện tại của người chơi
+    public int maxHealth = 100;
+    private int currentHealth;
 
     void Start()
     {
@@ -15,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Người chơi bị tấn công! Sức khỏe còn lại: " + currentHealth);
+        Debug.Log("Người chơi bị trừ: " + damage + " máu");
 
         if (currentHealth <= 0)
         {
@@ -26,6 +24,6 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Người chơi đã chết!");
-        // Thêm các hành động khi người chơi chết tại đây
+        // Thêm các xử lý khi người chơi chết, ví dụ như reload scene, show game over screen, v.v.
     }
 }

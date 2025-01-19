@@ -317,10 +317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe86ba6e74b113d468250f73ee70f756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  moveSpeed: 55
   attackRange: 2
-  attackCooldown: 1
+  attackRate: 1
+  damageAmount: 10
 --- !u!1 &660774233
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,9 +640,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 822966972}
+  - component: {fileID: 822966973}
   m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
+  m_Name: Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -664,6 +664,19 @@ Transform:
   - {fileID: 660774234}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &822966973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822966971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca58b0d8c027cc4294f25bc17551a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &1767750129
 GameObject:
   m_ObjectHideFlags: 0
