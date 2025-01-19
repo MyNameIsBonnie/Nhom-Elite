@@ -1,4 +1,4 @@
-namespace NatureRendererDemo
+﻿namespace NatureRendererDemo
 {
     using UnityEngine;
     using UnityEngine.Rendering;
@@ -6,6 +6,7 @@ namespace NatureRendererDemo
     [ExecuteInEditMode]
     public class RenderPipelineLighting : MonoBehaviour
     {
+
         [Header( "Input" )]
         [SerializeField]
         private GameObject _legacyInputSystem;
@@ -79,6 +80,10 @@ namespace NatureRendererDemo
         [SerializeField]
         private GameObject _highDefinitionPaintDecal;
 
+
+
+       
+
         private void OnValidate()
         {
             Awake();
@@ -136,18 +141,21 @@ namespace NatureRendererDemo
             {
                 case "":
                     RenderSettings.skybox = _standardSky;
+
                     SetTerrainMaterial( _standardTerrain );
                     SetLineMaterial( _standardLineMaterial );
                     SetCameraIconMaterial( _standardCameraIconMaterial );
                     break;
                 case "UniversalRenderPipelineAsset":
                     RenderSettings.skybox = _universalSky;
+
                     SetTerrainMaterial( _universalTerrain );
                     SetLineMaterial( _universalLineMaterial );
                     SetCameraIconMaterial( _universalCameraIconMaterial );
                     break;
                 case "HDRenderPipelineAsset":
                     RenderSettings.skybox = _highDefinitionSky;
+
                     SetTerrainMaterial( _highDefinitionTerrain );
                     SetLineMaterial( _highDefinitionLineMaterial );
                     SetCameraIconMaterial( _highDefinitionCameraIconMaterial );
