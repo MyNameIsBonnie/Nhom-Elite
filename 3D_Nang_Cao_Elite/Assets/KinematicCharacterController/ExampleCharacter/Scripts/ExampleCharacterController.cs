@@ -71,10 +71,6 @@ namespace KinematicCharacterController.Examples
         public Transform CameraFollowPoint;
         public float CrouchedCapsuleHeight = 1f;
 
-        [Header("Animations")]
-        [SerializeField]
-        private Animator _animator;
-
         public CharacterState CurrentCharacterState { get; private set; }
 
         private Collider[] _probedColliders = new Collider[8];
@@ -92,6 +88,10 @@ namespace KinematicCharacterController.Examples
 
         private Vector3 lastInnerNormal = Vector3.zero;
         private Vector3 lastOuterNormal = Vector3.zero;
+
+        Animator animator;
+        private bool isJumping;
+        private bool isGrounded;
 
         private void Awake()
         {
@@ -203,6 +203,7 @@ namespace KinematicCharacterController.Examples
             }
         }
 
+
         /// <summary>
         /// This is called every frame by the AI script in order to tell the character what its inputs are
         /// </summary>
@@ -305,10 +306,6 @@ namespace KinematicCharacterController.Examples
 
                             // Smooth movement Velocity
                             currentVelocity = Vector3.Lerp(currentVelocity, targetMovementVelocity, 1f - Mathf.Exp(-StableMovementSharpness * deltaTime));
-
-                            // Calculate forward direction value
-                            float forwardValue = Vector3.Dot(currentVelocity, Motor.CharacterForward);
-                            _animator.SetFloat("forward", forwardValue);
                         }
                         // Air movement
                         else
@@ -365,6 +362,7 @@ namespace KinematicCharacterController.Examples
                             // See if we actually are allowed to jump
                             if (!_jumpConsumed && ((AllowJumpingWhenSliding ? Motor.GroundingStatus.FoundAnyGround : Motor.GroundingStatus.IsStableOnGround) || _timeSinceLastAbleToJump <= JumpPostGroundingGraceTime))
                             {
+                                isJumping = true;
                                 // Calculate jump direction before ungrounding
                                 Vector3 jumpDirection = Motor.CharacterUp;
                                 if (Motor.GroundingStatus.FoundAnyGround && !Motor.GroundingStatus.IsStableOnGround)
@@ -419,6 +417,7 @@ namespace KinematicCharacterController.Examples
                                 // If we're on a ground surface, reset jumping values
                                 if (!_jumpedThisFrame)
                                 {
+
                                     _jumpConsumed = false;
                                 }
                                 _timeSinceLastAbleToJump = 0f;
