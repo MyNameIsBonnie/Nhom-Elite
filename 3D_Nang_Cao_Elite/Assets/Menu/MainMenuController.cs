@@ -38,17 +38,22 @@ public class MainMenuController : MonoBehaviour
 
     public void OnPlayButtonClicked()
     {
-        SceneManager.LoadScene("YourGameSceneName"); // Thay thế "YourGameSceneName" bằng tên scene của bạn
+        SceneManager.LoadScene("Map"); // Thay thế "YourGameSceneName" bằng tên scene của bạn
     }
 
     public void OnSettingsButtonClicked()
     {
         settingsPanel.SetActive(true); // Hiển thị panel cài đặt
+        playButton.SetActive(false);
+        settingsButton.SetActive(false);
+
     }
 
     public void OnCloseSettingsButtonClicked()
     {
         settingsPanel.SetActive(false); // Ẩn panel cài đặt khi đóng
+        playButton.SetActive(true);
+        settingsButton.SetActive(true);
     }
 }
 
