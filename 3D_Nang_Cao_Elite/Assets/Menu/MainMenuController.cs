@@ -14,18 +14,20 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
-        playButton.SetActive(false);
-        settingsButton.SetActive(false);
+        playButton.SetActive(true);
+        settingsButton.SetActive(true);
         imageToShow.SetActive(false);
         settingsPanel.SetActive(false); // Ẩn panel cài đặt khi bắt đầu
+
     }
 
     void Update()
     {
-        if (Input.anyKeyDown)
+        /*if (Input.anyKeyDown)
         {
             ShowUIElements();
-        }
+        }*/
+        
     }
 
     void ShowUIElements()
@@ -33,7 +35,7 @@ public class MainMenuController : MonoBehaviour
         playButton.SetActive(true);
         settingsButton.SetActive(true);
         startText.gameObject.SetActive(false);
-        imageToShow.SetActive(true);
+        //imageToShow.SetActive(true);
     }
 
     public void OnPlayButtonClicked()
