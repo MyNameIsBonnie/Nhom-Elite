@@ -222,20 +222,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
   m_PrefabInstance: {fileID: 717635576}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &243648513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243648512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0de0522bd771264181bc0c8dfd8aeb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4.81
-  wanderRadius: 5
 --- !u!54 &243648514
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -305,21 +291,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &243648519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243648512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe86ba6e74b113d468250f73ee70f756, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRange: 2
-  attackRate: 1
-  damageAmount: 10
 --- !u!195 &243648521
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -342,6 +313,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &243648523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243648512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c7a08d02bbb3f43a5fc587ba7656ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 243648521}
+  player: {fileID: 822966972}
+  detectionRange: 20
+  speed: 3.5
 --- !u!1 &362778717
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +408,7 @@ GameObject:
   - component: {fileID: 660774238}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -552,6 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
 --- !u!1001 &717635576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -604,6 +592,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -616,16 +608,13 @@ PrefabInstance:
       addedObject: {fileID: 243648514}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 243648513}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 243648517}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 243648519}
+      addedObject: {fileID: 243648521}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 243648521}
+      addedObject: {fileID: 243648523}
   m_SourcePrefab: {fileID: 100100000, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
 --- !u!1 &817812662
 GameObject:
@@ -765,6 +754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
 --- !u!1 &1767750129
 GameObject:
   m_ObjectHideFlags: 0
