@@ -9517,7 +9517,7 @@ GameObject:
   - component: {fileID: 1421285369}
   - component: {fileID: 1421285368}
   - component: {fileID: 1421285367}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
