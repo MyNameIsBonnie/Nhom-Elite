@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovementVerTwo : MonoBehaviour
 {
@@ -26,12 +27,18 @@ public class PlayerMovementVerTwo : MonoBehaviour
     private float? lastGroundedTime;
     private float? jumpButtonPressedTime;
 
+    [Header("Health")]
+    public Slider healthSlider;
+    public float maxHealth = 100f;
+    public float health;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         originalStepOffset = characterController.stepOffset;
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -93,6 +100,26 @@ public class PlayerMovementVerTwo : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        }
+
+        //take damage
+        if (healthSlider.value != health)
+        {
+            healthSlider.value = health;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            TakeDamage(10);
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
