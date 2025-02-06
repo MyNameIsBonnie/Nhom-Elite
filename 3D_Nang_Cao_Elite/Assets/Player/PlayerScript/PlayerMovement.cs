@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Animation")]
+    private Animator animator;
+    private CharacterController characterController;
+
     [Header("Movement")]
 
     public float moveSpeed;
@@ -36,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
         readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -64,6 +70,22 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+        
+        //test
+
+        Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
+        float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
+
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            inputMagnitude /= 2;
+        }
+
+        animator.SetFloat("Input Magnitude", inputMagnitude, 0.05f, Time.deltaTime);
+
+        float speed = inputMagnitude * moveSpeed;
+        movementDirection.Normalize();
+
         // when to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
