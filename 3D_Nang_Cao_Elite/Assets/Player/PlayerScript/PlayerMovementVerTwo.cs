@@ -32,6 +32,9 @@ public class PlayerMovementVerTwo : MonoBehaviour
     public float maxHealth = 100f;
     public float health;
 
+    [Header("InventoryUI")]
+    public GameObject Inventory;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,9 @@ public class PlayerMovementVerTwo : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         originalStepOffset = characterController.stepOffset;
         health = maxHealth;
+        Inventory.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -108,9 +114,27 @@ public class PlayerMovementVerTwo : MonoBehaviour
             healthSlider.value = health;
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             TakeDamage(10);
+        }
+
+        //cursor toggle
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.G))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        //inventory toggle
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Inventory.SetActive(!Inventory.activeSelf); // Toggle the active state
         }
     }
 
@@ -123,15 +147,16 @@ public class PlayerMovementVerTwo : MonoBehaviour
         }
     }
 
-    private void OnApplicationFocus(bool focus)
-    {
-        if (focus)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-    }
+
+    //private void OnApplicationFocus(bool focus)
+    //{
+    //    if (focus)
+    //    {
+    //        Cursor.lockState = CursorLockMode.Locked;
+    //    }
+    //    else
+    //    {
+    //        Cursor.lockState = CursorLockMode.None;
+    //    }
+    //}
 }
