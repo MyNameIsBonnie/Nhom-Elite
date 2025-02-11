@@ -33,7 +33,9 @@ public class PlayerMovementVerTwo : MonoBehaviour
     public float health;
 
     [Header("InventoryUI")]
-    public GameObject Inventory;
+    public GameObject inventory;
+    public Button inventoryButton;
+    public Button reverseInventoryButton;
 
     // Start is called before the first frame update
     void Start()
@@ -42,9 +44,10 @@ public class PlayerMovementVerTwo : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         originalStepOffset = characterController.stepOffset;
         health = maxHealth;
-        Inventory.SetActive(false);
+        inventory.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
     }
 
     // Update is called once per frame
@@ -132,9 +135,14 @@ public class PlayerMovementVerTwo : MonoBehaviour
         }
 
         //inventory toggle
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && inventoryButton == isActiveAndEnabled)
         {
-            Inventory.SetActive(!Inventory.activeSelf); // Toggle the active state
+            inventoryButton.onClick.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && inventoryButton != isActiveAndEnabled)
+        {
+            reverseInventoryButton.enabled = true;
+            reverseInventoryButton.onClick.Invoke();
         }
     }
 
