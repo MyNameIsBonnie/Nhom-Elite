@@ -50,6 +50,9 @@ public class NPC : MonoBehaviour
             }
             typingCoroutine = StartCoroutine(TypeLine(conversationLines[currentLineIndex]));
 
+            // Hiển thị lại nút Continue
+            continueButton.gameObject.SetActive(true);
+
             // Vô hiệu hóa các script điều khiển di chuyển và FreeLook Camera của người chơi
             if (playerScript != null)
             {
@@ -116,8 +119,9 @@ public class NPC : MonoBehaviour
         }
         else
         {
-            // Nếu hết dòng trò chuyện, ẩn panel
+            // Nếu hết dòng trò chuyện, ẩn panel và nút Continue
             HideConversationPanel();
+            continueButton.gameObject.SetActive(false);
         }
     }
 
@@ -129,8 +133,16 @@ public class NPC : MonoBehaviour
             conversationText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+
+        // Kiểm tra nếu đang ở dòng cuối cùng và đã hiển thị xong dòng text
+        if (currentLineIndex == conversationLines.Count - 1)
+        {
+            continueButton.gameObject.SetActive(false);
+        }
     }
 }
+
+
 
 
 

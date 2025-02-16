@@ -1232,6 +1232,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 708325363}
     m_Modifications:
+    - target: {fileID: 281700445225418413, guid: 64db8d48fab1ceb43a8ee5d52643029a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e9953909597fa8840ba138cbf1e90322, type: 2}
+    - target: {fileID: 281700445225418413, guid: 64db8d48fab1ceb43a8ee5d52643029a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6127395625895404759, guid: 64db8d48fab1ceb43a8ee5d52643029a, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.9263
@@ -1332,8 +1340,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.9693446, y: 1.8215191, z: 2.7124095}
-  m_Center: {x: 0.16593526, y: 0.88631916, z: 1.2012801}
+  m_Size: {x: 1.229163, y: 1.8215191, z: 1.2100413}
+  m_Center: {x: -0.0605979, y: 0.88631916, z: 0.45009574}
 --- !u!114 &1880814202
 MonoBehaviour:
   m_ObjectHideFlags: 0
