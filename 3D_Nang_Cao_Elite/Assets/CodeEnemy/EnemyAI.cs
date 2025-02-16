@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+
 public class EnemyAI : MonoBehaviour
 {
     public Transform player; // Biến lưu người chơi
@@ -41,6 +42,13 @@ public class EnemyAI : MonoBehaviour
         {
             navMeshAgent.SetDestination(player.position); // Di chuyển về phía người chơi
             animator.SetFloat("Speed", navMeshAgent.velocity.magnitude); // Cập nhật Speed cho animator
+
+            // Xoay hướng quái vật theo hướng di chuyển
+            if (navMeshAgent.velocity != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(navMeshAgent.velocity.normalized);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            }
 
             if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
             {
@@ -95,4 +103,5 @@ public class EnemyAI : MonoBehaviour
         }
     }
 }
+
 
