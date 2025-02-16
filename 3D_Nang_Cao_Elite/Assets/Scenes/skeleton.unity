@@ -326,9 +326,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 243648521}
-  player: {fileID: 0}
-  detectionRange: 20
-  speed: 3.5
+  target: {fileID: 0}
+  radius: 10
+  originalePosition: {x: 0, y: 0, z: 0}
+  maxDistance: 50
+  damageZone: {fileID: 0}
+  attackCooldown: 2
 --- !u!1 &383575381
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,27 +373,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 109.97
+      value: 13.546105
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 109.97
+      value: 13.546105
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 109.97
+      value: 13.546105
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 345.1
+      value: 478.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.14
+      value: -14.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 287
+      value: 489.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 887102d181c7ff54abd582d3b0b7df5f, type: 3}
       propertyPath: m_LocalRotation.w
