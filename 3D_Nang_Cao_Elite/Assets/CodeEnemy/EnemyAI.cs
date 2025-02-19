@@ -23,10 +23,10 @@ public class EnemyAI : MonoBehaviour
         damageZone = GetComponent<Collider>();
         health = GetComponent<Health>(); // Khởi tạo biến Health
 
-        if (damageZone != null)
+        /*if (damageZone != null)
         {
             damageZone.isTrigger = true; // Đảm bảo Box Collider là trigger
-        }
+        }*/
 
         if (health != null)
         {
