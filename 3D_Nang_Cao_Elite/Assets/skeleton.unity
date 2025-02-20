@@ -1863,17 +1863,17 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[2]
       value: 
       objectReference: {fileID: 1051118212}
+    - target: {fileID: 4200628409253522853, guid: 92835af2bcd888945bffb1778674d952, type: 3}
+      propertyPath: conversationLines.Array.data[0]
+      value: vvv
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200628409253522853, guid: 92835af2bcd888945bffb1778674d952, type: 3}
+      propertyPath: conversationLines.Array.data[1]
+      value: vvvv
+      objectReference: {fileID: 0}
     - target: {fileID: 4791518533687773440, guid: 92835af2bcd888945bffb1778674d952, type: 3}
       propertyPath: m_Name
       value: NPC_dong
-      objectReference: {fileID: 0}
-    - target: {fileID: 6743394465635205851, guid: 92835af2bcd888945bffb1778674d952, type: 3}
-      propertyPath: m_Acceleration
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6743394465635205851, guid: 92835af2bcd888945bffb1778674d952, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
