@@ -36,6 +36,12 @@ public class PlayerMovementVerTwo : MonoBehaviour
     public GameObject inventory;
     public Button inventoryButton;
     public Button reverseInventoryButton;
+    public KeyCode inventoryKey = KeyCode.E;
+    private bool inventoryOpen = false;
+
+    [Header("CursorToggle")]
+    public KeyCode toggleKeyCursorLock = KeyCode.F;
+    private bool cursorLocked = false;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +53,10 @@ public class PlayerMovementVerTwo : MonoBehaviour
         inventory.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        if (inventoryButton != null)
+        {
+            inventoryOpen = inventoryButton.gameObject.activeInHierarchy; // Check if the GameObject is active at start
+        }
     }
 
     // Update is called once per frame
@@ -122,49 +131,56 @@ public class PlayerMovementVerTwo : MonoBehaviour
             TakeDamage(10);
         }
 
-        //cursor toggle
-        if (Input.GetKeyDown(KeyCode.F))
+
+        if (Input.GetKeyDown(toggleKeyCursorLock))
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.G))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            cursorLocked = !cursorLocked; // Toggle the state
+
+            if (cursorLocked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
 
-        //inventory toggle
-        if (Input.GetKeyDown(KeyCode.E) && inventoryButton == isActiveAndEnabled)
+        ////inventory toggle
+        //if (Input.GetKeyDown(KeyCode.E) && inventoryButton == isActiveAndEnabled)
+        //{
+        //    inventoryButton.onClick.Invoke();
+        //}
+        //else if (Input.GetKeyDown(KeyCode.E) && inventoryButton != isActiveAndEnabled)
+        //{
+        //    reverseInventoryButton.enabled = true;
+        //    reverseInventoryButton.onClick.Invoke();
+        //}
+        if (Input.GetKeyDown(inventoryKey))
         {
-            inventoryButton.onClick.Invoke();
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && inventoryButton != isActiveAndEnabled)
-        {
-            reverseInventoryButton.enabled = true;
-            reverseInventoryButton.onClick.Invoke();
+            if (inventoryButton != null)
+            {
+                inventoryOpen = !inventoryOpen;
+                if (inventoryOpen)
+                {
+                    inventory.gameObject.SetActive(inventoryOpen);
+                }
+                else
+                {
+                    inventory.gameObject.SetActive(false);
+                }
+            }
         }
     }
 
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        if (health <= 0)
+        public void TakeDamage(float damage)
         {
-            Destroy(gameObject);
-        }
+            health -= damage;
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
     }
-
-
-    //private void OnApplicationFocus(bool focus)
-    //{
-    //    if (focus)
-    //    {
-    //        Cursor.lockState = CursorLockMode.Locked;
-    //    }
-    //    else
-    //    {
-    //        Cursor.lockState = CursorLockMode.None;
-    //    }
-    //}
 }

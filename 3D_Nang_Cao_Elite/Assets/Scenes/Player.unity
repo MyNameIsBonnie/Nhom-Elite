@@ -742,7 +742,11 @@ MonoBehaviour:
   healthSlider: {fileID: 1754912801}
   maxHealth: 100
   health: 0
-  Inventory: {fileID: 6224032}
+  inventory: {fileID: 6224032}
+  inventoryButton: {fileID: 2082986307}
+  reverseInventoryButton: {fileID: 1889708292}
+  inventoryKey: 101
+  toggleKeyCursorLock: 102
 --- !u!143 &196819966
 CharacterController:
   m_ObjectHideFlags: 0
