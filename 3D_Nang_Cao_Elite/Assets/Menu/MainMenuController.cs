@@ -18,7 +18,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnPlayButtonClicked()
     {
-        SceneManager.LoadScene("1"); // Thay thế "YourGameSceneName" bằng tên scene của bạn
+        SceneManager.LoadScene("1"); 
     }
     void Start()
     {
