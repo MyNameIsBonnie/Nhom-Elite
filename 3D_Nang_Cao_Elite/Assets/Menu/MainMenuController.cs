@@ -8,13 +8,18 @@ using UnityEngine.UI; // Import SceneManager
 public class MainMenuController : MonoBehaviour
 {
     public GameObject playButton; // Nút Play
-    public GameObject settingsButton; // Nút Setting
     public GameObject storyButton;
-    public TextMeshProUGUI startText; // Văn bản "Nhấn bất kỳ đâu để bắt đầu"
+    public GameObject settingsButton; // Nút Setting
+    public GameObject quitButton;
     public GameObject imageToShow; // Hình ảnh sẽ hiển thị
     public GameObject settingsPanel; // Panel cài đặt
     public GameObject storyPanel; // Panel cot truyen
 
+
+    public void OnPlayButtonClicked()
+    {
+        SceneManager.LoadScene("1"); // Thay thế "YourGameSceneName" bằng tên scene của bạn
+    }
     void Start()
     {
         playButton.SetActive(true);
@@ -23,18 +28,7 @@ public class MainMenuController : MonoBehaviour
         settingsPanel.SetActive(false); // Ẩn panel cài đặt khi bắt đầu
         storyPanel.SetActive(false);
         storyButton.SetActive(true);
-
-    }
-
-    void Update()
-    {
-
-    }
-
-
-    public void OnPlayButtonClicked()
-    {
-        SceneManager.LoadScene("1"); // Thay thế "YourGameSceneName" bằng tên scene của bạn
+        quitButton.SetActive(true); // Hiển thị nút thoát game
     }
 
     public void OnSettingsButtonClicked()
@@ -44,8 +38,7 @@ public class MainMenuController : MonoBehaviour
         settingsButton.SetActive(false);
         imageToShow.SetActive(false);
         storyButton.SetActive(false);
-
-
+        quitButton.SetActive(false); // Ẩn nút thoát game
     }
 
     public void OnCloseSettingsButtonClicked()
@@ -55,7 +48,7 @@ public class MainMenuController : MonoBehaviour
         settingsButton.SetActive(true);
         imageToShow.SetActive(true);
         storyButton.SetActive(true);
-
+        quitButton.SetActive(true); // Hiển thị nút thoát game
     }
 
     public void OnStory()//hien story
@@ -66,7 +59,9 @@ public class MainMenuController : MonoBehaviour
         imageToShow.SetActive(false);
         settingsPanel.SetActive(false);
         storyButton.SetActive(false);
+        quitButton.SetActive(false); // Ẩn nút thoát game
     }
+
     public void CloseStory()
     {
         storyPanel.SetActive(false);
@@ -75,6 +70,17 @@ public class MainMenuController : MonoBehaviour
         imageToShow.SetActive(true);
         settingsPanel.SetActive(false);
         storyButton.SetActive(true);
+        quitButton.SetActive(true); // Hiển thị nút thoát game
+    }
+
+    public void OnQuitButtonClicked()
+    {
+        // Thoát game
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
     }
 }
 
