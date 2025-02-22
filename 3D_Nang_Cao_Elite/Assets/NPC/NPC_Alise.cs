@@ -112,7 +112,7 @@ public class NPC_Alise : MonoBehaviour
         MoveToNextWaypoint();
     }
 
-    void ShowDialogue(string key)
+    public void ShowDialogue(string key)
     {
         if (dialogueOptions.ContainsKey(key))
         {
