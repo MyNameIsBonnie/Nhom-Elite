@@ -23,7 +23,7 @@ public class DamageZone : MonoBehaviour
         if (other.gameObject.CompareTag(targetTag) && !colliderTargets.Contains(other))
         {
             colliderTargets.Add(other);
-            var go = other.GetComponent<Health>();
+            var go = other.GetComponent<Enemy_Health>();
             if (go != null)
             {
                 go.TakeDamage(damageAmount);
@@ -37,7 +37,7 @@ public class DamageZone : MonoBehaviour
         if (other.gameObject.CompareTag(targetTag) && !colliderTargets.Contains(other))
         {
             colliderTargets.Add(other);
-            var go = other.GetComponent<Health>();
+            var go = other.GetComponent<Enemy_Health>();
             if (go != null)
             {
                 go.TakeDamage(damageAmount);

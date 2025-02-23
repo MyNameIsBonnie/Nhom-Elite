@@ -12,48 +12,44 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator animator;
     private float lastAttackTime = -Mathf.Infinity; // Thời điểm lần tấn công cuối cùng
-    private Collider damageZone; // Vùng gây sát thương
-
-    private Health health; // Thêm biến Health
+    private bool isAttacking = false; // Kiểm soát trạng thái tấn công
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        damageZone = GetComponent<Collider>();
-        health = GetComponent<Health>(); // Khởi tạo biến Health
-
-        /*if (damageZone != null)
-        {
-            damageZone.isTrigger = true; // Đảm bảo Box Collider là trigger
-        }*/
-
-        if (health != null)
-        {
-            health.animator = animator; // Liên kết Animator với Health
-        }
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Enemy_Health enemyHealth = GetComponent<Enemy_Health>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(30); // Gây sát thương
+            
+            }
+        }
+
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
-        if (distanceToPlayer <= detectionRange)
+        if (distanceToPlayer <= detectionRange && !isAttacking)
         {
             navMeshAgent.SetDestination(player.position); // Di chuyển về phía người chơi
             animator.SetFloat("Speed", navMeshAgent.velocity.magnitude); // Cập nhật Speed cho animator
 
             // Xoay hướng quái vật theo hướng di chuyển
-            if (navMeshAgent.velocity != Vector3.zero)
+            if (navMeshAgent.velocity.magnitude > 0.1f)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(navMeshAgent.velocity.normalized);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
             }
 
+            // Kiểm tra nếu có thể tấn công
             if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
             {
-                Attack(); // Gọi hàm tấn công khi trong phạm vi tấn công và hết thời gian chờ
-                lastAttackTime = Time.time; // Cập nhật thời điểm tấn công cuối cùng
+                StartAttack();
             }
         }
         else
@@ -63,22 +59,18 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
+    void StartAttack()
     {
-        // Hiển thị phạm vi phát hiện trong chế độ Scene
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
-
-        // Hiển thị phạm vi tấn công trong chế độ Scene
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        isAttacking = true;
+        animator.SetTrigger("Attack");
+        navMeshAgent.isStopped = true; // Ngừng di chuyển khi tấn công
     }
 
-    void Attack()
+    // **Gọi từ Animation Event khi đòn đánh thực sự xảy ra**
+    public void PerformAttack()
     {
-        animator.SetTrigger("Attack");
+        if (player == null) return;
 
-        // Gây sát thương cho người chơi nếu trong phạm vi tấn công
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
         if (distanceToPlayer <= attackRange)
         {
@@ -90,18 +82,20 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // Hàm xử lý va chạm với Damage Zone
-    private void OnTriggerEnter(Collider other)
+    // **Gọi từ Animation Event khi đòn đánh kết thúc**
+    public void EndAttack()
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(attackDamage); // Gây sát thương cho người chơi khi vào vùng gây damage
-            }
-        }
+        isAttacking = false;
+        navMeshAgent.isStopped = false; // Tiếp tục di chuyển sau khi tấn công
+        lastAttackTime = Time.time; // Cập nhật thời gian tấn công cuối cùng
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
-
-
