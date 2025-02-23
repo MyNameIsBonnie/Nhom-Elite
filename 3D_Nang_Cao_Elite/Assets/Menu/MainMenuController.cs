@@ -17,7 +17,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnPlayButtonClicked()
     {
-        SceneManager.LoadScene("1"); 
+        SceneManager.LoadScene(1); 
     }
     void Start()
     {
