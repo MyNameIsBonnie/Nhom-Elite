@@ -20,7 +20,7 @@ public class ItemController : MonoBehaviour
     }
     public void UseItem()
     {
-        switch (item.itemType)
+        /*switch (item.itemType)
         {
             case Item.ItemType.HpPotion:
                 PlayerMovementVerTwo.Instance.InstantHealPotion();
@@ -29,6 +29,23 @@ public class ItemController : MonoBehaviour
                 PlayerMovementVerTwo.Instance.RegenPotion();
                 break;
         }
+        RemoveItem();*/
+        if (item == null)
+        {
+            Debug.LogError("UseItem() - item is NULL!");
+            return;
+        }
+
+        switch (item.itemType)
+        {
+            case Item.ItemType.HpPotion:
+                PlayerMovementVerTwo.Instance?.InstantHealPotion();
+                break;
+            case Item.ItemType.RegenPotion:
+                PlayerMovementVerTwo.Instance?.RegenPotion();
+                break;
+        }
+
         RemoveItem();
     }
 }

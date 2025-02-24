@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
@@ -31,13 +31,12 @@ public class InventoryManager : MonoBehaviour
     {
         Items.Remove(item);
     }
-
     public void ListItems()
     {
-        //clean content before open
-        foreach (Transform item in ItemContent)
+        // Xoá tất cả các item con một cách an toàn
+        for (int i = ItemContent.childCount - 1; i >= 0; i--)
         {
-            Destroy(item.gameObject);
+            DestroyImmediate(ItemContent.GetChild(i).gameObject);
         }
 
         foreach (var item in Items)
@@ -51,7 +50,28 @@ public class InventoryManager : MonoBehaviour
         }
         SetInventoryItems();
     }
-    public void SetInventoryItems()
+
+    /*
+        public void ListItems()
+        {
+            //clean content before open
+            foreach (Transform item in ItemContent)
+            {
+                Destroy(item.gameObject);
+            }
+
+            foreach (var item in Items)
+            {
+                GameObject obj = Instantiate(InventoryItem, ItemContent);
+                var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+
+                itemName.text = item.itemName;
+                itemIcon.sprite = item.icon;
+            }
+            SetInventoryItems();
+        }*/
+    /*public void SetInventoryItems()
     {
         ItemsController = ItemContent.GetComponentsInChildren<ItemController>();
 
@@ -60,5 +80,48 @@ public class InventoryManager : MonoBehaviour
             ItemsController[i].AddItem(Items[i]);
         }
 
+    }*/
+    /*public void SetInventoryItems()
+    {
+        ItemsController = ItemContent.GetComponentsInChildren<ItemController>();
+
+        if (ItemsController.Length != Items.Count)
+        {
+            Debug.LogError($"Mismatch: ItemsController.Length = {ItemsController.Length}, Items.Count = {Items.Count}");
+        }
+
+        for (int i = 0; i < ItemsController.Length; i++)
+        {
+            if (ItemsController[i] == null)
+            {
+                Debug.LogError($"ItemsController[{i}] is NULL!");
+                continue;
+            }
+
+            if (i < Items.Count)
+            {
+                ItemsController[i].AddItem(Items[i]);
+            }
+            else
+            {
+                Debug.LogError($"Index {i} out of range for Items.Count = {Items.Count}");
+            }
+        }
+    }*/
+    public void SetInventoryItems()
+    {
+        ItemsController = ItemContent.GetComponentsInChildren<ItemController>();
+
+        if (ItemsController.Length != Items.Count)
+        {
+            Debug.LogError($"Mismatch: ItemsController.Length = {ItemsController.Length}, Items.Count = {Items.Count}. Check ItemContent cleanup.");
+            return;
+        }
+
+        for (int i = 0; i < ItemsController.Length; i++)
+        {
+            ItemsController[i].AddItem(Items[i]);
+        }
     }
+
 }
