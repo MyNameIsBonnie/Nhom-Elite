@@ -49,6 +49,6 @@ public class Enemy_Health : MonoBehaviour
             healthBarFill.transform.parent.gameObject.SetActive(false); // Ẩn thanh máu khi chết
         }
 
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 2f);
     }
 }

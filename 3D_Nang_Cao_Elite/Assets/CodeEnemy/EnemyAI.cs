@@ -22,15 +22,6 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Enemy_Health enemyHealth = GetComponent<Enemy_Health>();
-            if (enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(30); // Gây sát thương
-            
-            }
-        }
 
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
@@ -74,10 +65,10 @@ public class EnemyAI : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
         if (distanceToPlayer <= attackRange)
         {
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            PlayerMovementVerTwo playerHealth = player.GetComponent<PlayerMovementVerTwo>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(attackDamage); // Gây sát thương cho người chơi
+                playerHealth.TakeDamage((int)attackDamage);
             }
         }
     }

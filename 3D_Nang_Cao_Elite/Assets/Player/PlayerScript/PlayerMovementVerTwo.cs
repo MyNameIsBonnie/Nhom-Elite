@@ -203,31 +203,27 @@ public class PlayerMovementVerTwo : MonoBehaviour
     }
     private void Attack()
     {
-        // Kiểm tra cooldown
-        if (Time.time - lastAttackTime < attackCooldown) return;
+        if (Time.time - lastAttackTime < attackCooldown) return; // Kiểm tra cooldown
+        lastAttackTime = Time.time;
 
-        lastAttackTime = Time.time; // Cập nhật thời gian tấn công gần nhất
+        animator.SetTrigger(attackHash);
 
-        // Kích hoạt animation attack (nếu có)
-        if (animator != null)
-        {
-            animator.SetTrigger(attackHash);
-        }
-
-        // Kiểm tra kẻ địch bằng Raycast
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
         {
-            if (hit.collider.CompareTag("Enemy")) // Chỉ đánh kẻ địch có tag "Enemy"
+            
+
+            Enemy_Health enemy = hit.collider.GetComponent<Enemy_Health>();
+            if (enemy != null)
             {
-                Enemy_Health enemy = hit.collider.GetComponent<Enemy_Health>();
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(attackDamage);
-                }
+                
+                enemy.TakeDamage(attackDamage);
             }
+            
         }
+        
     }
+
     /*public void TakeDamage(int damage)
     {
         //health -= damage;
