@@ -145,9 +145,9 @@ public class NPC_Alise : MonoBehaviour
     {
         choicesPanel.SetActive(false);
 
-        if (choice == "Kết thúc")
+        if (choice == "Ket thuc")
         {
-            conversationText.text = "Hãy suy nghĩ cẩn thận...";
+            conversationText.text = "Hay suy nghi can than...";
             StartCoroutine(CloseConversationAfterDelay());
             return;
         }
@@ -166,24 +166,24 @@ public class NPC_Alise : MonoBehaviour
     void InitializeDialogue()
     {
         dialogueOptions["intro"] = new string[] {
-            "Ngươi không phải người duy nhất muốn Mordain biến mất. Nhưng ta tự hỏi... ngươi muốn hủy diệt hắn, hay hủy diệt tất cả?",
-            "Ngươi biết gì về lời nguyền?",
-            "Ta nên làm gì?"
+            "Nguoi khong phai nguoi duy nhat muon Mordain bien mat. Nhung ta tu hoi... nguoi muon huy diet han, hay huy diet tat ca?",
+            "Nguoi biet gi ve loi nguyen?",
+            "Ta nen lam gi?"
         };
 
-        dialogueOptions["Ngươi biết gì về lời nguyền?"] = new string[] {
-            "Mordain không chỉ là một kẻ bạo chúa. Hắn đã giao kèo với bóng tối để giữ vững ngai vàng. Chừng nào hắn còn sống, bóng tối sẽ bao trùm Eldoria.",
-            "Trở lại",
-            "Kết thúc"
+        dialogueOptions["Nguoi biet gi ve loi nguyen?"] = new string[] {
+            "Mordain khong chi la mot ke bao chua. Han da giao keo voi bong toi de giu vung ngai vang. Chung nao han con song, bong toi se bao trum Eldoria.",
+            "Tro lai",
+            "Ket thuc"
         };
 
-        dialogueOptions["Ta nên làm gì?"] = new string[] {
-            "Ngươi có nhiều lựa chọn hơn ngươi tưởng. Đánh bại Mordain không khó. Nhưng liệu ngươi có định thay thế hắn, hay để Eldoria sụp đổ mãi mãi?",
-            "Trở lại",
-            "Kết thúc"
+        dialogueOptions["Ta nen lam gi?"] = new string[] {
+            "Nguoi co nhieu lua chon hon nguoi tuong. Danh bai Mordain khong kho. Nhung lieu nguoi co dinh thay the han, hay de Eldoria sup do mai mai?",
+            "Tro lai",
+            "Ket thuc"
         };
 
-        dialogueOptions["Trở lại"] = dialogueOptions["intro"];
-        dialogueOptions["Kết thúc"] = new string[] { "Hãy suy nghĩ cẩn thận...", "", "" };
+        dialogueOptions["Tro lai"] = dialogueOptions["intro"];
+        dialogueOptions["Ket thuc"] = new string[] { "Hay suy nghi can than...", "", "" };
     }
 }

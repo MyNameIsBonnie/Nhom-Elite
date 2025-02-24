@@ -70,9 +70,9 @@ public class NPC_Cedric : MonoBehaviour
     {
         choicesPanel.SetActive(false);
 
-        if (choice == "Kết thúc")
+        if (choice == "Ket thuc")
         {
-            conversationText.text = "Hãy suy nghĩ thật kỹ...";
+            conversationText.text = "Hay suy nghi that ky...";
             StartCoroutine(CloseConversationAfterDelay());
             return;
         }
@@ -97,15 +97,15 @@ public class NPC_Cedric : MonoBehaviour
     void InitializeDialogue()
     {
         dialogueOptions["intro"] = new string[] {
-            "Kael... Ta không bao giờ nghĩ rằng có ngày lại gặp ngươi ở đây. Ngươi còn nhớ vương quốc ta từng bảo vệ không? Giờ nó chỉ còn là đống đổ nát, bị những kẻ không còn linh hồn thống trị.",
-            "Điểm yếu của Mordain là gì?"
+            "Kael... Ta khong bao gio nghi rang co ngay lai gap nguoi o day. Nguoi con nho vuong quoc ta tung bao ve khong? Gio no chi con la dong do nat, bi nhung ke khong con linh hon thong tri.",
+            "Diem yeu cua Mordain la gi?"
         };
 
-        dialogueOptions["Điểm yếu của Mordain là gì?"] = new string[] {
-            "Hắn không phải bất tử. Hắn chỉ là con người, dù đã bị bóng tối nuốt chửng. Nhưng hắn sợ lửa – ngọn lửa có thể thiêu rụi tất cả những gì hắn xây dựng.",
-            "Kết thúc"
+        dialogueOptions["Diem yeu cua Mordain la gi?"] = new string[] {
+            "Han khong phai bat tu. Han chi la con nguoi, du da bi bong toi nuot chung. Nhung han so lua – ngon lua co the thieu rui tat ca nhung gi han xay dung.",
+            "Ket thuc"
         };
 
-        dialogueOptions["Kết thúc"] = new string[] { "Hãy suy nghĩ thật kỹ...", "" };
+        dialogueOptions["Ket thuc"] = new string[] { "Hay suy nghi that ky...", "" };
     }
 }

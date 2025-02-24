@@ -31,7 +31,7 @@ public class PlayerMovementVerTwo : MonoBehaviour
     private float? jumpButtonPressedTime;
 
     [Header("Attack Settings")]
-    public float attackDamage = 10f;
+    public float attackDamage = 25f;
     public float attackRange = 2f;
     public float attackCooldown = 0.5f;
     private float lastAttackTime;
@@ -215,18 +215,18 @@ public class PlayerMovementVerTwo : MonoBehaviour
         }
 
         // Kiểm tra kẻ địch bằng Raycast
-        /*RaycastHit hit;
+        RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
         {
             if (hit.collider.CompareTag("Enemy")) // Chỉ đánh kẻ địch có tag "Enemy"
             {
-                EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
+                Enemy_Health enemy = hit.collider.GetComponent<Enemy_Health>();
                 if (enemy != null)
                 {
                     enemy.TakeDamage(attackDamage);
                 }
             }
-        }*/
+        }
     }
     /*public void TakeDamage(int damage)
     {
