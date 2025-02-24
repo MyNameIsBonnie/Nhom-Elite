@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Regen Potion
   value: 10
   icon: {fileID: 21300000, guid: 5b401a326777a054395bc63ec3a52797, type: 3}
+  itemType: 2

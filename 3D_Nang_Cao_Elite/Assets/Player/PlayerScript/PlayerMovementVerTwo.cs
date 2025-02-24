@@ -32,6 +32,9 @@ public class PlayerMovementVerTwo : MonoBehaviour
     public float maxHealth = 100f;
     public float health;
 
+    public float regenHealPerSecond = 5f;
+    public float regenDuration = 10f;
+
     [Header("InventoryUI")]
     public GameObject inventory;
     public Button inventoryButton;
@@ -42,7 +45,11 @@ public class PlayerMovementVerTwo : MonoBehaviour
     [Header("CursorToggle")]
     public KeyCode toggleKeyCursorLock = KeyCode.F;
     private bool cursorLocked = false;
-
+    public static PlayerMovementVerTwo Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -120,7 +127,7 @@ public class PlayerMovementVerTwo : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
-        //take damage
+        //take damage UI
         if (healthSlider.value != health)
         {
             healthSlider.value = health;
@@ -148,16 +155,6 @@ public class PlayerMovementVerTwo : MonoBehaviour
             }
         }
 
-        ////inventory toggle
-        //if (Input.GetKeyDown(KeyCode.E) && inventoryButton == isActiveAndEnabled)
-        //{
-        //    inventoryButton.onClick.Invoke();
-        //}
-        //else if (Input.GetKeyDown(KeyCode.E) && inventoryButton != isActiveAndEnabled)
-        //{
-        //    reverseInventoryButton.enabled = true;
-        //    reverseInventoryButton.onClick.Invoke();
-        //}
         if (Input.GetKeyDown(inventoryKey))
         {
             if (inventoryButton != null)
@@ -175,12 +172,39 @@ public class PlayerMovementVerTwo : MonoBehaviour
         }
     }
 
-        public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
+    {
+        //health -= damage;
+        health = Mathf.Min(health - damage);
+        if (health <= 0)
         {
-            health -= damage;
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
+        }
+    }
+
+    public void InstantHealPotion()
+    {
+        Heal(30f); // Heal for 30
+    }
+
+    public void RegenPotion()
+    {
+        StartCoroutine(RegenCoroutine());
+    }
+    private IEnumerator RegenCoroutine()
+    {
+        float timer = 0f;
+
+        while (timer < regenDuration)
+        {
+            Heal(regenHealPerSecond * Time.deltaTime); // Heal over time
+            timer += Time.deltaTime;
+            yield return null; // Wait for the next frame
+        }
+    }
+    public void Heal(float healAmount)
+    {
+        health = Mathf.Min(health + healAmount, maxHealth);
+
     }
 }

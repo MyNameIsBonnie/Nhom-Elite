@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Power Potion
   value: 10
   icon: {fileID: 21300000, guid: 4ab2ecc0d0294b24eb0618226376b0a3, type: 3}
+  itemType: 1

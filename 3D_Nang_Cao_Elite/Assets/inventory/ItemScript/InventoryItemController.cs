@@ -4,10 +4,9 @@ using UnityEngine;
 using static UnityEditor.Progress;
 using UnityEngine.UI;
 
-public class ItemController : MonoBehaviour
+public class InventoryItemController : MonoBehaviour
 {
     public Item item;
-
     public void RemoveItem()
     {
         InventoryManager.Instance.Remove(item);
@@ -18,6 +17,7 @@ public class ItemController : MonoBehaviour
     {
         item = newItem;
     }
+
     public void UseItem()
     {
         switch (item.itemType)
