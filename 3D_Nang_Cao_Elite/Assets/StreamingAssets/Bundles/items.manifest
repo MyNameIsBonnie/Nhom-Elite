@@ -1,0 +1,51 @@
+ManifestFileVersion: 0
+CRC: 4146197778
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c1b853966b478690f29cab10340f13f9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 29787720746af510d37ab2d545a42bd9
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: c1b853966b478690f29cab10340f13f9
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 38caf3d1dd4821149b70fe98960d6a0d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 577323f60992c9e439296ff17f852a06, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0e5033c5f5647ba42af0a2fa07600416, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/RF/RedPotion4.prefab
+- Assets/RF/RedPotion3.prefab
+- Assets/RF/RedPotion1.prefab
+- Assets/RF/RedPotion5.prefab
+- Assets/RF/RedPotion2.prefab
+- Assets/RF/RedPotion.prefab
+Dependencies: []

@@ -4,9 +4,9 @@ using UnityEngine;
 public class AssetBundleLoader : MonoBehaviour
 {
     //vào prefabs của GameObject đó, trong cửa sổ Inpcetor phía dưới cùng "Asset Bundle" -> new cái name của prefabs đó rồi gán vào bundleName.
-    string bundleName = "Items"; // Đặt tên bundle đúng với Asset Bundle Name
+    string bundleName = "items"; // Đặt tên bundle đúng với Asset Bundle Name
     //gán tên gốc asset của prefab đó 
-    string[] assetNames = { "RedLookingPotion", "PurpleLookingPotion", "OrangeLookingPotion" }; //tên asset
+    string[] assetNames = { "RedPotion", "RedPotion1" , "RedPotion2" , "RedPotion3", "RedPotion4" , "RedPotion5" }; //tên asset
 
     IEnumerator Start()
     {
