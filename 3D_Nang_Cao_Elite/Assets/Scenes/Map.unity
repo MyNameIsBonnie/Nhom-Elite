@@ -1585,6 +1585,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 92259209820278615, guid: b6c68e08f84fe4a499f12d0108ea3089, type: 3}
+      propertyPath: m_Size.y
+      value: 0.16000009
+      objectReference: {fileID: 0}
+    - target: {fileID: 92259209820278615, guid: b6c68e08f84fe4a499f12d0108ea3089, type: 3}
+      propertyPath: m_Size.z
+      value: 0.9563174
+      objectReference: {fileID: 0}
+    - target: {fileID: 92259209820278615, guid: b6c68e08f84fe4a499f12d0108ea3089, type: 3}
+      propertyPath: m_Center.z
+      value: 0.58315873
+      objectReference: {fileID: 0}
     - target: {fileID: 586414245694231601, guid: b6c68e08f84fe4a499f12d0108ea3089, type: 3}
       propertyPath: m_text
       value: eeeeeeeeeeeeeeee
@@ -1786,7 +1798,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 559, y: 0}
+  m_AnchoredPosition: {x: 559, y: 48}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216853684
@@ -2666,13 +2678,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 413262788}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 413262789}
+        m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
+        m_MethodName: OnQuitButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8815,7 +8827,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 413262789}
         m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
-        m_MethodName: OnQuitButtonClicked
+        m_MethodName: OpenSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12735,7 +12747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4984941955191831826, guid: 2e9779d963b1a8948b211aeda3d2e1a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 132.92
+      value: 130.4
       objectReference: {fileID: 0}
     - target: {fileID: 4984941955191831826, guid: 2e9779d963b1a8948b211aeda3d2e1a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18606,7 +18618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -4}
+  m_AnchoredPosition: {x: 0, y: 44.000034}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1706724943
@@ -19504,7 +19516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -553, y: 0}
+  m_AnchoredPosition: {x: -553, y: 48.000034}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1787192477
