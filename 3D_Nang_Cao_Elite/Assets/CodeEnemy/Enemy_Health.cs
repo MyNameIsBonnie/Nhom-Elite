@@ -10,20 +10,28 @@ public class Enemy_Health : MonoBehaviour
     public Animator animator;
     public Image healthBarFill; // Dùng Image thay vì Slider
 
+    public AudioClip hurtSound; // Âm thanh khi bị tấn công
+    private AudioSource audioSource;
     private void Start()
     {
         currentHP = maxHP;
         UpdateHealthUI();
+        audioSource = GetComponent<AudioSource>(); // Lấy AudioSource
+
     }
 
     public virtual void TakeDamage(float damage)
     {
         currentHP -= damage;
-        currentHP = Mathf.Max(0, currentHP);
 
-        UpdateHealthUI();
+        if (hurtSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(hurtSound); // Phát âm thanh khi bị đánh
+        }
 
-        if (currentHP == 0)
+        UpdateHealthUI(); // Cập nhật UI thanh máu sau khi bị tấn công
+
+        if (currentHP <= 0)
         {
             Die();
         }

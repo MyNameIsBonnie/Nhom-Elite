@@ -9,15 +9,19 @@ public class EnemyAI : MonoBehaviour
     public float attackDamage = 10f; // Sát thương mỗi lần tấn công
     public float attackCooldown = 2f; // Thời gian giữa các lần tấn công
 
+    
+
     private NavMeshAgent navMeshAgent;
     private Animator animator;
     private float lastAttackTime = -Mathf.Infinity; // Thời điểm lần tấn công cuối cùng
     private bool isAttacking = false; // Kiểm soát trạng thái tấn công
 
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
     }
 
     void Update()

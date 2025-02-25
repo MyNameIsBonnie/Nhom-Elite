@@ -52,6 +52,13 @@ public class PlayerMovementVerTwo : MonoBehaviour
     public KeyCode inventoryKey = KeyCode.E;
     private bool inventoryOpen = false;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip moveSound;
+    public AudioClip attackSound;
+    public AudioClip hurtSound;
+
+
     [Header("CursorToggle")]
     public KeyCode toggleKeyCursorLock = KeyCode.F;
     private bool cursorLocked = false;
@@ -136,6 +143,17 @@ public class PlayerMovementVerTwo : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+
+            if (!audioSource.isPlaying) // Chỉ phát nếu chưa có âm thanh đang chạy
+            {
+                audioSource.clip = moveSound;
+                audioSource.loop = true; // Loop cho âm thanh di chuyển
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            audioSource.loop = false;
         }
 
         //take damage UI
@@ -144,10 +162,7 @@ public class PlayerMovementVerTwo : MonoBehaviour
             healthSlider.value = health;
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TakeDamage(10);
-        }
+       
 
 
         if (Input.GetKeyDown(toggleKeyCursorLock))
@@ -165,7 +180,7 @@ public class PlayerMovementVerTwo : MonoBehaviour
                 Cursor.visible = true;
             }
         }
-
+        
 
 
         /*if (Input.GetKeyDown(inventoryKey))
@@ -186,12 +201,14 @@ public class PlayerMovementVerTwo : MonoBehaviour
 
         if (Input.GetKeyDown(inventoryKey))
         {
+            
             inventoryOpen = !inventoryOpen;
             inventory.SetActive(inventoryOpen);
 
             // Khi mở Inventory, mở con trỏ chuột
             Cursor.lockState = inventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = inventoryOpen;
+            
         }
 
         // Gọi hàm Attack nếu nhấn chuột phai (hoặc phím tấn công)
@@ -203,25 +220,35 @@ public class PlayerMovementVerTwo : MonoBehaviour
     }
     private void Attack()
     {
+
         if (Time.time - lastAttackTime < attackCooldown) return; // Kiểm tra cooldown
         lastAttackTime = Time.time;
 
-        animator.SetTrigger(attackHash);
+        animator.SetTrigger(attackHash); // Chạy animation đánh
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
+        if (attackSound != null)
         {
-            
+            audioSource.PlayOneShot(attackSound);
+        }
 
-            Enemy_Health enemy = hit.collider.GetComponent<Enemy_Health>();
+        Vector3 attackPosition = transform.position + transform.forward * 1f; // Lấy vị trí tấn công phía trước
+        float attackRadius = 1.5f; // Phạm vi đánh
+
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPosition, attackRadius); // Lấy tất cả kẻ địch trong vùng
+
+        foreach (Collider enemyCollider in hitEnemies)
+        {
+            Enemy_Health enemy = enemyCollider.GetComponent<Enemy_Health>();
             if (enemy != null)
             {
-                
                 enemy.TakeDamage(attackDamage);
+                Debug.Log("Hit enemy: " + enemy.name); // Kiểm tra xem đánh trúng ai
             }
-            
         }
-        
+
+        // Debug hình cầu tấn công
+        Debug.DrawRay(attackPosition, Vector3.up * 0.1f, Color.red, 1f);
+
     }
 
     /*public void TakeDamage(int damage)
@@ -236,8 +263,21 @@ public class PlayerMovementVerTwo : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health = Mathf.Max(0, health - damage); // Giữ giá trị từ 0 trở lên
+        /*health = Mathf.Max(0, health - damage); // Giữ giá trị từ 0 trở lên
         healthSlider.value = health; // Cập nhật UI ngay lập tức
+
+        if (health <= 0)
+        {
+            Die();
+        }*/
+
+        health = Mathf.Max(0, health - damage);
+        healthSlider.value = health;
+
+        if (hurtSound != null)
+        {
+            audioSource.PlayOneShot(hurtSound);
+        }
 
         if (health <= 0)
         {
@@ -247,7 +287,7 @@ public class PlayerMovementVerTwo : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject,2f);
+        Destroy(gameObject,1.5f);
         //Debug.Log("Player has died.");
         animator.SetTrigger("Die");
     }

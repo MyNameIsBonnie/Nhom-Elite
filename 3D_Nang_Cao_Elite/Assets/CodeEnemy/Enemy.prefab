@@ -434,7 +434,7 @@ MonoBehaviour:
   player: {fileID: 0}
   detectionRange: 5
   attackRange: 2
-  attackDamage: 10
+  attackDamage: 5
   attackCooldown: 1.5
 --- !u!114 &5966552159910652705
 MonoBehaviour:
@@ -452,3 +452,4 @@ MonoBehaviour:
   currentHP: 100
   animator: {fileID: 5226996483796384248}
   healthBarFill: {fileID: 1457825007367053822}
+  hurtSound: {fileID: 8300000, guid: 9f0c06faacc7b2342a08d709c043eaf1, type: 3}
