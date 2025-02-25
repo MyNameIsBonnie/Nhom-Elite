@@ -4661,7 +4661,7 @@ AudioSource:
   m_GameObject: {fileID: 413262788}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7081901198765909986, guid: 4af2f5963205a8a4a89a1fab522ae291, type: 2}
   m_audioClip: {fileID: 8300000, guid: cf64e0cfa4429034d84a5223c7ca467e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -12829,6 +12829,10 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 2.065689
       objectReference: {fileID: 0}
+    - target: {fileID: 8004397564786266165, guid: 2e9779d963b1a8948b211aeda3d2e1a7, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -2344305797156881432, guid: 4af2f5963205a8a4a89a1fab522ae291, type: 2}
     - target: {fileID: 8079196038475681707, guid: 2e9779d963b1a8948b211aeda3d2e1a7, type: 3}
       propertyPath: orientation
       value: 
@@ -19910,7 +19914,7 @@ AudioSource:
   m_GameObject: {fileID: 1837284724}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2344305797156881432, guid: 4af2f5963205a8a4a89a1fab522ae291, type: 2}
   m_audioClip: {fileID: 8300000, guid: f8d30e373d8579e4a9eedd5e16f7adb6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.55
