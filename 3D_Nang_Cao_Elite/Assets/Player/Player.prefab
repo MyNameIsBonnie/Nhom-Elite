@@ -104,8 +104,9 @@ MonoBehaviour:
   attackDamage: 40
   attackRange: 8
   attackCooldown: 1
+  healEffectPrefab: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
   healthSlider: {fileID: 0}
-  maxHealth: 100
+  maxHealth: 200
   health: 0
   regenHealPerSecond: 5
   regenDuration: 10

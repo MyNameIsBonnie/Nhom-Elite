@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PlayerMovementVerTwo : MonoBehaviour
@@ -36,10 +37,14 @@ public class PlayerMovementVerTwo : MonoBehaviour
     public float attackCooldown = 0.5f;
     private float lastAttackTime;
     private int attackHash = Animator.StringToHash("Attack");
+    private bool isAttacking = false;
+
+    [Header("VFX")]
+    public GameObject healEffectPrefab;
 
     [Header("Health")]
     public Slider healthSlider;
-    public float maxHealth = 100f;
+    public float maxHealth = 200f;
     public float health;
 
     public float regenHealPerSecond = 5f;
@@ -86,6 +91,8 @@ public class PlayerMovementVerTwo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isAttacking) return;
+         
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -183,23 +190,6 @@ public class PlayerMovementVerTwo : MonoBehaviour
         }
         
 
-
-        /*if (Input.GetKeyDown(inventoryKey))
-        {
-            if (inventoryButton != null)
-            {
-                inventoryOpen = !inventoryOpen;
-                if (inventoryOpen)
-                {
-                    inventory.gameObject.SetActive(inventoryOpen);
-                }
-                else
-                {
-                    inventory.gameObject.SetActive(false);
-                }
-            }
-        }*/
-
         if (Input.GetKeyDown(inventoryKey))
         {
             
@@ -225,6 +215,7 @@ public class PlayerMovementVerTwo : MonoBehaviour
         if (Time.time - lastAttackTime < attackCooldown) return; // Kiểm tra cooldown
         lastAttackTime = Time.time;
 
+        isAttacking = true; // Đặt trạng thái đang tấn công
         animator.SetTrigger(attackHash); // Chạy animation đánh
 
         if (attackSound != null)
@@ -243,35 +234,23 @@ public class PlayerMovementVerTwo : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(attackDamage);
-                Debug.Log("Hit enemy: " + enemy.name); // Kiểm tra xem đánh trúng ai
+                //Debug.Log("Hit enemy: " + enemy.name); // Kiểm tra xem đánh trúng ai
             }
         }
 
         // Debug hình cầu tấn công
         Debug.DrawRay(attackPosition, Vector3.up * 0.1f, Color.red, 1f);
-
+        
     }
 
-    /*public void TakeDamage(int damage)
-    {
-        //health -= damage;
-        health = Mathf.Min(health - damage);
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }*/
 
+    public void EndAttackP()
+    {
+        isAttacking = false;
+        
+    }
     public void TakeDamage(int damage)
     {
-        /*health = Mathf.Max(0, health - damage); // Giữ giá trị từ 0 trở lên
-        healthSlider.value = health; // Cập nhật UI ngay lập tức
-
-        if (health <= 0)
-        {
-            Die();
-        }*/
-
         health = Mathf.Max(0, health - damage);
         healthSlider.value = health;
 
@@ -289,7 +268,6 @@ public class PlayerMovementVerTwo : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject,1.5f);
-        //Debug.Log("Player has died.");
         animator.SetTrigger("Die");
     }
 
@@ -297,6 +275,12 @@ public class PlayerMovementVerTwo : MonoBehaviour
     public void InstantHealPotion()
     {
         Heal(30f); // Heal for 30
+        if (healEffectPrefab != null)
+        {
+            GameObject healEffect = Instantiate(healEffectPrefab, transform.position, Quaternion.identity);
+            Destroy(healEffect, 1f); // Xóa hiệu ứng sau 2 giây
+        }
+
     }
 
     public void RegenPotion()

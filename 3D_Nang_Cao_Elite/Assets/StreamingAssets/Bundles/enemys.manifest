@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2631510590
+CRC: 621015015
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 05a265fa7f95e0c8cd939993731e89bb
+    Hash: 899774ee0525f89e03054e0a44dcaadf
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 5419de9998c604b0ab092e9e2e5f8b6f
+    Hash: 14f179ef6290b0405a5b2e534a449f9b
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 05a265fa7f95e0c8cd939993731e89bb
+    Hash: 899774ee0525f89e03054e0a44dcaadf
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -30,8 +30,6 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 74
   Script: {instanceID: 0}
-- Class: 82
-  Script: {instanceID: 0}
 - Class: 83
   Script: {instanceID: 0}
 - Class: 89
@@ -49,32 +47,18 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: aeec544ae056eb242a8821c8e59f70bc, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 82c7a08d02bbb3f43a5fc587ba7656ee, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 38caf3d1dd4821149b70fe98960d6a0d, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 10aecd48014458840bec843d9785d85d, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 577323f60992c9e439296ff17f852a06, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 0e5033c5f5647ba42af0a2fa07600416, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 136
   Script: {instanceID: 0}
 - Class: 137
   Script: {instanceID: 0}
-- Class: 143
-  Script: {instanceID: 0}
 - Class: 195
-  Script: {instanceID: 0}
-- Class: 198
-  Script: {instanceID: 0}
-- Class: 199
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -90,6 +74,5 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
-- Assets/RF/potions.prefab
 - Assets/RF/enemies.prefab
 Dependencies: []
