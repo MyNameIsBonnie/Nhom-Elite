@@ -108,12 +108,13 @@ public class PlayerMovementVerTwo : MonoBehaviour
         if (characterController.isGrounded)
         {
             lastGroundedTime = Time.time;
+            animator.SetBool("Jump", false);
         }
 
         if (Input.GetButtonDown("Jump"))
         {
             jumpButtonPressedTime = Time.time;
-            animator.SetTrigger("Jump");
+            animator.SetBool("Jump", true);
         }
 
         if (Time.time - lastGroundedTime <= jumpButtonGracePeriod)
