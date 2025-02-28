@@ -12,6 +12,11 @@ public class Enemy_Health : MonoBehaviour
 
     public AudioClip hurtSound; // Âm thanh khi bị tấn công
     private AudioSource audioSource;
+
+    public GameObject lootPrefab; // Vật phẩm rơi ra khi quái chết
+    private bool isDead = false; // Trạng thái quái vật đã chết
+
+
     private void Start()
     {
         currentHP = maxHP;
@@ -20,8 +25,15 @@ public class Enemy_Health : MonoBehaviour
 
     }
 
+     void Update()
+    {
+        if (isDead) return; // Nếu quái đã chết, không làm gì nữa
+
+    }
     public virtual void TakeDamage(float damage)
     {
+        
+
         currentHP -= damage;
 
         if (hurtSound != null && audioSource != null)
@@ -37,6 +49,14 @@ public class Enemy_Health : MonoBehaviour
         }
     }
 
+    void DropLoot()
+    {
+        if (lootPrefab != null)
+        {
+            Instantiate(lootPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
     void UpdateHealthUI()
     {
         if (healthBarFill != null)
@@ -47,6 +67,8 @@ public class Enemy_Health : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
         if (animator != null)
         {
             animator.SetTrigger("Die");
@@ -57,6 +79,7 @@ public class Enemy_Health : MonoBehaviour
             healthBarFill.transform.parent.gameObject.SetActive(false); // Ẩn thanh máu khi chết
         }
 
+        Invoke(nameof(DropLoot), 2f); // Gọi DropLoot() ngay trước khi bị hủy
         Destroy(gameObject, 2f);
     }
 }

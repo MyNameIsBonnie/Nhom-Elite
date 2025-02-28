@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     public float attackDamage = 10f; // Sát thương mỗi lần tấn công
     public float attackCooldown = 2f; // Thời gian giữa các lần tấn công
 
-    
+
 
     private NavMeshAgent navMeshAgent;
     private Animator animator;
@@ -22,10 +22,19 @@ public class EnemyAI : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
+
+        player = FindAnyObjectByType<PlayerMovementVerTwo>()?.transform;
+
+        if (player == null)
+        {
+            Debug.LogError("Player not found in the scene!");
+        }
+
     }
 
     void Update()
     {
+
 
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
