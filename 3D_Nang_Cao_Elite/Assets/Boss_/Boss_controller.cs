@@ -1,30 +1,45 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Boss_controller : MonoBehaviour
 {
-    public Transform player; // Tham chiếu đến player
-    public float moveSpeed = 3f; // Tốc độ di chuyển của boss
-    public float attackRange = 2f; // Tầm tấn công tầm gần
-    public float rangedAttackRange = 5f; // Tầm tấn công tầm xa
-    public int meleeDamage = 10; // Sát thương tấn công tầm gần
-    public int rangedDamage = 5; // Sát thương tấn công tầm xa
-    public float attackCooldown = 2f; // Thời gian chờ giữa các đợt tấn công
-    public GameObject projectilePrefab; // Prefab cho đạn tấn công tầm xa
-    public Transform projectileSpawnPoint; // Vị trí spawn đạn
+    public Transform player;
+    public float moveSpeed = 3f;
+    public float attackRange = 2f;
+    public float rangedAttackRange = 5f;
+    public int meleeDamage = 10;
+    public int rangedDamage = 5;
+    public float attackCooldown = 2f;
+    public GameObject projectilePrefab;
+    public Transform projectileSpawnPoint;
 
     [Header("Health")]
     public Slider healthSlider;
-    public float maxHealth = 200f;
+    private float maxHealth = 300f;
     public float health;
 
     private Animator animator;
     private float lastAttackTime;
 
+
+    [Header("Sound Effects")]
+    private AudioSource audioSource;
+    public AudioClip hurtSound;
+    public AudioClip rangedAttackSound;
+    public AudioClip deathSound;
+    
     void Start()
     {
+        health = maxHealth;
         animator = GetComponent<Animator>();
-        lastAttackTime = -attackCooldown; // Đảm bảo boss có thể tấn công ngay lập tức
+        audioSource = GetComponent<AudioSource>();
+        lastAttackTime = -attackCooldown;
+        if (player == null)
+        {
+            FindPlayer();
+        }
+        
     }
 
     void Update()
@@ -35,59 +50,67 @@ public class Boss_controller : MonoBehaviour
 
         if (distanceToPlayer <= attackRange)
         {
-            // Tấn công tầm gần
             if (Time.time >= lastAttackTime + attackCooldown)
             {
                 animator.SetTrigger("MeleeAttack");
+                
                 lastAttackTime = Time.time;
             }
         }
         else if (distanceToPlayer <= rangedAttackRange)
         {
-            // Tấn công tầm xa
             if (Time.time >= lastAttackTime + attackCooldown)
             {
                 animator.SetTrigger("RangedAttack");
+                
                 lastAttackTime = Time.time;
             }
         }
         else
         {
-            // Di chuyển đến player
             transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
         }
 
-        // Xoay boss hướng về player
         Vector3 direction = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
-    // Hàm này sẽ được gọi từ animation event khi tấn công tầm gần
+    void FindPlayer()
+    {
+        GameObject foundPlayer = GameObject.FindWithTag("Player");
+        if (foundPlayer != null)
+        {
+            player = foundPlayer.transform;
+        }
+        else
+        {
+            Debug.LogError("Không tìm thấy Player trong Scene! Hãy chắc chắn Player có tag 'Player'.");
+        }
+    }
+
     public void MeleeAttack()
     {
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
-            // Gây sát thương cho player
             PlayerMovementVerTwo playerHealth = player.GetComponent<PlayerMovementVerTwo>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(10);
+                playerHealth.TakeDamage(meleeDamage);
             }
         }
     }
 
-    // Hàm này sẽ được gọi từ animation event khi tấn công tầm xa
     public void RangedAttack()
     {
+        PlaySound(rangedAttackSound);
         if (projectileSpawnPoint == null)
         {
             Debug.LogError("ProjectileSpawnPoint chưa được gán!");
             return;
         }
 
-        // Tạo đạn tại vị trí spawn
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
         fireBall projectileScript = projectile.GetComponent<fireBall>();
         if (projectileScript != null)
@@ -96,24 +119,41 @@ public class Boss_controller : MonoBehaviour
             projectileScript.SetDamage(rangedDamage);
         }
     }
+
     public void TakeDamage(int damage)
     {
         health = Mathf.Max(0, health - damage);
         healthSlider.value = health;
 
-        /*if (hurtSound != null)
-        {
-            audioSource.PlayOneShot(hurtSound);
-        }*/
+        PlaySound(hurtSound);
 
         if (health <= 0)
         {
             Die();
         }
     }
+
     void Die()
     {
+        PlaySound(deathSound);
         Destroy(gameObject, 3.5f);
         animator.SetTrigger("Die");
+
+        Invoke(nameof(LoadEndScene), 3f);
+        Debug.Log("cho load scene");
     }
+    void LoadEndScene()
+    {
+        SceneManager.LoadScene(3); // Thay "EndScene" bằng tên scene bạn muốn
+    }
+    
+
+    void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
+   
 }

@@ -67,11 +67,22 @@ public class PlayerMovementVerTwo : MonoBehaviour
     [Header("CursorToggle")]
     public KeyCode toggleKeyCursorLock = KeyCode.F;
     private bool cursorLocked = false;
+    private int enemyKillCount = 0;
     public static PlayerMovementVerTwo Instance;
+
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -148,8 +159,9 @@ public class PlayerMovementVerTwo : MonoBehaviour
 
         if (movementDirection != Vector3.zero)
         {
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+           
 
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
 
             if (!audioSource.isPlaying) // Chỉ phát nếu chưa có âm thanh đang chạy
@@ -181,6 +193,7 @@ public class PlayerMovementVerTwo : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                
             }
             else
             {
@@ -234,23 +247,27 @@ public class PlayerMovementVerTwo : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(attackDamage);
-                //Debug.Log("Hit enemy: " + enemy.name); // Kiểm tra xem đánh trúng ai
             }
 
             Boss_controller boss = enemyCollider.GetComponent<Boss_controller>();
             if(boss != null)
             {
-                boss.TakeDamage(30);
+                boss.TakeDamage(35);
             }
         }
 
         
         // Debug hình cầu tấn công
-        Debug.DrawRay(attackPosition, Vector3.up * 0.1f, Color.red, 1f);
+        //Debug.DrawRay(attackPosition, Vector3.up * 0.1f, Color.red, 1f);
         
     }
 
-
+    public void StartAttackP()
+    {
+       
+           
+        
+    }
     public void EndAttackP()
     {
         isAttacking = false;

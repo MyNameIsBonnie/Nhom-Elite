@@ -1,7 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static PlayerHealth Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public float maxHP = 100f;
     public float currentHP;
 
@@ -25,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
     {
         // Logic cho việc chết của người chơi, ví dụ: kết thúc trò chơi
         Debug.Log("Player Died");
+        SceneManager.LoadScene(2);
     }
 }
 

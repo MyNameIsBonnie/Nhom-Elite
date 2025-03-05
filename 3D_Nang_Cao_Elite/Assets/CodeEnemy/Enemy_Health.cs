@@ -81,5 +81,9 @@ public class Enemy_Health : MonoBehaviour
 
         Invoke(nameof(DropLoot), 2f); // Gọi DropLoot() ngay trước khi bị hủy
         Destroy(gameObject, 2f);
+
+        QuestManager.instance.EnemyKilled(); // Báo nhiệm vụ khi Enemy chết
+        
+
     }
 }

@@ -47,3 +47,4 @@ MonoBehaviour:
   Items: []
   ItemContent: {fileID: 0}
   InventoryItem: {fileID: 3060587906492677920, guid: 757d25ca6c1a65a44bb6b980103cf911, type: 3}
+  ItemsController: []
