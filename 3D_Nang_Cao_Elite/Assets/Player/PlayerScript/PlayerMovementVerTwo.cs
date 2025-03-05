@@ -236,8 +236,15 @@ public class PlayerMovementVerTwo : MonoBehaviour
                 enemy.TakeDamage(attackDamage);
                 //Debug.Log("Hit enemy: " + enemy.name); // Kiểm tra xem đánh trúng ai
             }
+
+            Boss_controller boss = enemyCollider.GetComponent<Boss_controller>();
+            if(boss != null)
+            {
+                boss.TakeDamage(30);
+            }
         }
 
+        
         // Debug hình cầu tấn công
         Debug.DrawRay(attackPosition, Vector3.up * 0.1f, Color.red, 1f);
         
