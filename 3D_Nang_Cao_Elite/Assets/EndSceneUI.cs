@@ -13,6 +13,14 @@ public class EndSceneUI : MonoBehaviour
         Invoke(nameof(ShowEndScreen), 5f); // Hiển thị UI sau 5 giây
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            QuitGame();
+        }
+    }
+
     void ShowEndScreen()
     {
         endScreenUI.SetActive(true);

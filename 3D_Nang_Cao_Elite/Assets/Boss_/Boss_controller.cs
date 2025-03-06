@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.AI;
+using TMPro;
 public class Boss_controller : MonoBehaviour
 {
     public Transform player;
@@ -14,6 +15,8 @@ public class Boss_controller : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform projectileSpawnPoint;
 
+    public TextMeshProUGUI bossDieMess;
+
     [Header("Health")]
     public Slider healthSlider;
     private float maxHealth = 300f;
@@ -21,6 +24,7 @@ public class Boss_controller : MonoBehaviour
 
     private Animator animator;
     private float lastAttackTime;
+    private NavMeshAgent navAgent; // Thêm biến này để điều khiển NavMeshAgent
 
 
     [Header("Sound Effects")]
@@ -35,16 +39,18 @@ public class Boss_controller : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         lastAttackTime = -attackCooldown;
+        navAgent = GetComponent<NavMeshAgent>(); // Lấy NavMeshAgent
         if (player == null)
         {
             FindPlayer();
         }
-        
+
+
     }
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null || health <= 0) return; // Nếu boss chết, không làm gì nữa
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -139,11 +145,18 @@ public class Boss_controller : MonoBehaviour
     void Die()
     {
         PlaySound(deathSound);
-        Destroy(gameObject, 3.5f);
+
+        if (navAgent != null)
+        {
+            navAgent.enabled = false; // Vô hiệu hóa NavMeshAgent
+        }
+
         animator.SetTrigger("Die");
+        Destroy(gameObject, 3.5f);
 
         Invoke(nameof(LoadEndScene), 3f);
-        Debug.Log("cho load scene");
+        bossDieMess.text = "NGON LUA HUY DIET BAT DAU!";
+
     }
     void LoadEndScene()
     {
