@@ -92,12 +92,15 @@ public class Boss_controller : MonoBehaviour
 
     public void MeleeAttack()
     {
-        if (Vector3.Distance(transform.position, player.position) <= attackRange)
+        if (player != null)
         {
-            PlayerMovementVerTwo playerHealth = player.GetComponent<PlayerMovementVerTwo>();
-            if (playerHealth != null)
+            if (Vector3.Distance(transform.position, player.position) <= attackRange)
             {
-                playerHealth.TakeDamage(meleeDamage);
+                PlayerMovementVerTwo playerHealth = player.GetComponent<PlayerMovementVerTwo>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(meleeDamage);
+                }
             }
         }
     }
