@@ -26,10 +26,11 @@ public class QuestManager : MonoBehaviour
     public void EnemyKilled()
     {
         enemyKillCount++;
-        KillCountText.text = "Enemy killed: " + enemyKillCount;
+        KillCountText.text = "Enemy killed: " + enemyKillCount + "/4";
 
         if (enemyKillCount >= 4)
         {
+            KillCountText.color = Color.green;
             StartCoroutine(CountdownToBoss(7)); // Gọi hàm đếm ngược
         }
     }

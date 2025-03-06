@@ -152,11 +152,9 @@ public class Boss_controller : MonoBehaviour
         }
 
         animator.SetTrigger("Die");
+        Invoke(nameof(LoadEndScene), 3.5f); 
         Destroy(gameObject, 3.5f);
-
-        Invoke(nameof(LoadEndScene), 3f);
         bossDieMess.text = "NGON LUA HUY DIET BAT DAU!";
-
     }
     void LoadEndScene()
     {
