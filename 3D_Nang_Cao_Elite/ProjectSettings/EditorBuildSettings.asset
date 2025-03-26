@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/HieuOnline.unity
+    guid: d39f3d2e7467cc0479c0e8b62a1101fd
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 6e0e179c7fcbe1a45bcc6d4d5b268da5
   - enabled: 1
